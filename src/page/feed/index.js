@@ -1,25 +1,36 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet, StatusBar } from 'react-native';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 
-// Tela de Carteira
- const Carteira = () => {
+
+const Feed = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      justifyContent: 'center',
+    },
+    box1: {
+      paddingTop: getStatusBarHeight(),
+      height: 160,
+      flexShrink: 0,
+      borderRadius: 19,
+      backgroundColor: '#313131',
       alignItems: 'center',
+      justifyContent: 'center',
     },
-    text: {
-      fontSize: 24,
-      fontWeight: 'bold',
-    },
+    box2: {},
   });
-  
+
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Tela de feed</Text>
-      {/* Adicione o conteúdo da tela de carteira aqui */}
+      <StatusBar translucent backgroundColor="transparent" />
+
+      <View style={styles.box1}>
+
+      </View>
+      <View></View>
+      <View></View>
     </View>
   );
 };
-export default Carteira
+
+export default Feed;
