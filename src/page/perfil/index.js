@@ -16,7 +16,7 @@ import { View, Text, StyleSheet } from 'react-native';
   });
   
   return (
-    <View style={styles.container}>
+    <View style={{backgroundColor:"#000", flex:1}}>
       <Text style={styles.text}>Tela de feed</Text>
       {/* Adicione o conteúdo da tela de carteira aqui */}
     </View>

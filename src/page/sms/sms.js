@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 
 const SMS = () => {
   return (
-    <View>
+    <View style={{backgroundColor:"#000", flex:1}}>
       <Text>Tela de SMS</Text>
       {/* Adicione o conteúdo da tela de SMS aqui */}
     </View>

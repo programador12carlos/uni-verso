@@ -1,36 +1,55 @@
-import React from 'react';
-import { View, StyleSheet, StatusBar } from 'react-native';
-import { getStatusBarHeight } from 'react-native-status-bar-height';
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Modal, TouchableOpacity, Dimensions } from "react-native";
 
 
-const Feed = () => {
-  const styles = StyleSheet.create({
-    container: {
+import Ionicons from "@expo/vector-icons/Ionicons";
+
+export default function Notificacao({ visible, setModalVisible }) {
+  const [windowHeight, setWindowHeight] = useState(Dimensions.get("window").height);
+
+  useEffect(() => {
+    const updateWindowHeight = () => {
+      setWindowHeight(Dimensions.get("window").height);
+    };
+
+    Dimensions.addEventListener("change", updateWindowHeight);
+
+    return () => {
+      Dimensions.removeEventListener("change", updateWindowHeight);
+    };
+  }, []);
+
+  const Styles = StyleSheet.create({
+    modalContainer: {
       flex: 1,
+      justifyContent: "flex-end",
+      backgroundColor: "rgba(0, 0, 0, 0.5)",
     },
-    box1: {
-      paddingTop: getStatusBarHeight(),
-      height: 160,
-      flexShrink: 0,
-      borderRadius: 19,
-      backgroundColor: '#313131',
-      alignItems: 'center',
-      justifyContent: 'center',
+    modalContent: {
+      height: windowHeight * 0.5,
+      backgroundColor: "#fff",
+      borderTopLeftRadius: 20,
+      borderTopRightRadius: 20,
+      padding: 20,
     },
-    box2: {},
+    closeButton: {
+      position: "absolute",
+      top: 10,
+      left: 10,
+    },
   });
 
   return (
-    <View style={styles.container}>
-      <StatusBar translucent backgroundColor="transparent" />
-
-      <View style={styles.box1}>
-
+    <Modal animationType="slide" transparent={true} visible={visible}>
+      <View style={Styles.modalContainer}>
+        <View style={Styles.modalContent}>
+          <TouchableOpacity onPress={() => setModalVisible(false)} style={Styles.closeButton}>
+            <Ionicons name="ios-close-sharp" size={24} color="black" />
+          </TouchableOpacity>
+          <Text>Conteúdo do Modal</Text>
+          {/* Adicione o conteúdo do seu modal aqui */}
+        </View>
       </View>
-      <View></View>
-      <View></View>
-    </View>
+    </Modal>
   );
-};
-
-export default Feed;
+}
